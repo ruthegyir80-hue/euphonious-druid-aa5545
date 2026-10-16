@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth Salvage Egyir — Customer Service & Virtual Assistant Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --cream:      #F5F0E8;
+    --cream-dark: #EDE6D8;
+    --espresso:   #2C1810;
+    --brown-mid:  #5C3D2E;
+    --terra:      #C4633A;
+    --gold:       #C9A84C;
+    --gold-light: #E8D5A3;
+    --blush:      #E8D5C4;
+    --text-body:  #3D2B1F;
+    --text-muted: #7A5C4A;
+  }
+
+  /* ── SAMPLE CARDS ── */
+  .sample-card {
+    background: white; padding: 1rem; border-radius: 8px;
+    border: 1px solid rgba(201,168,76,0.2); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .sample-title { text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem; }
+  .sample-card img { width: 100%; height: auto; border-radius: 4px; display: block; }
+  .sample-desc { font-size: 0.85rem; line-height: 1.6; color: var(--text-body); margin-top: 0.8rem; }
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-body);
+    overflow-x: hidden;
+  }
+
+  /* ── LOADING SCREEN ── */
+  #loader {
+    position: fixed; inset: 0;
+    background: var(--espresso);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    animation: loaderFade 0.6s ease 1.8s forwards;
+  }
+  .loader-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+    animation: loaderPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes loaderPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  @keyframes loaderFade {
+    to { opacity: 0; pointer-events: none; }
+  }
+
+  /* ── PARTICLES CANVAS ── */
+  #particles-canvas {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(44,24,16,0.08); }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--espresso);
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--terra); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--espresso); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 7rem 2rem 4rem;
+    position: relative; z-index: 1;
+  }
+  .hero-inner {
+    text-align: center; max-width: 820px;
+  }
+  .avatar-wrap {
+    width: 90px; height: 90px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+  .avatar-ring {
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    animation: avatarRing 2.5s ease-in-out infinite;
+  }
+  .avatar-ring-2 {
+    position: absolute; inset: -16px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.35);
+    animation: avatarRing 2.5s ease-in-out 0.6s infinite;
+  }
+  @keyframes avatarRing {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.06); opacity: 0.4; }
+  }
+  .avatar-circle {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--terra), var(--espresso));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--gold-light);
+    letter-spacing: 0.04em;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--terra); font-weight: 600; margin-bottom: 1.2rem;
+    opacity: 0; animation: fadeUp 0.7s ease 2.2s forwards;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-weight: 700; line-height: 1;
+    color: var(--espresso);
+    margin-bottom: 0.5rem;
+    position: relative; display: inline-block;
+    opacity: 0; animation: fadeUp 0.7s ease 2.4s forwards;
+  }
+  /* Shimmer sweep */
+  .hero-name::after {
+    content: attr(data-text);
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(201,168,76,0.75) 45%,
+      rgba(232,213,163,0.9) 52%,
+      rgba(201,168,76,0.65) 58%,
+      transparent 78%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 100%;
+    animation: shimmer 3.5s ease 3.2s infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-style: italic; color: var(--terra); margin-bottom: 1.4rem;
+    opacity: 0; animation: fadeUp 0.7s ease 2.6s forwards;
+  }
+  .hero-tagline {
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    color: var(--text-muted); line-height: 1.75; max-width: 560px; margin: 0 auto 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s ease 2.8s forwards;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.7s ease 3s forwards;
+  }
+  .btn {
+    display: inline-block; padding: 0.75rem 2rem; border-radius: 2px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary {
+    background: var(--espresso); color: var(--gold-light);
+    border: 1.5px solid var(--espresso);
+  }
+  .btn-secondary {
+    background: transparent; color: var(--terra);
+    border: 1.5px solid var(--terra);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,24,16,0.15); }
+
+  /* ── SECTIONS BASE ── */
+  section { position: relative; z-index: 1; }
+  .section-wrap {
+    max-width: 1000px; margin: 0 auto; padding: 5.5rem 2rem;
+  }
+  .section-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.6rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700; color: var(--espresso);
+    margin-bottom: 3rem; line-height: 1.15;
+  }
+  .divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--terra), var(--gold));
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--cream-dark); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .about-text p {
+    font-size: 0.98rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.2rem;
+  }
+  .about-details { display: flex; flex-direction: column; gap: 1rem; }
+  .detail-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.1rem 1.4rem;
+    background: rgba(245,240,232,0.7);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+  }
+  .detail-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .detail-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem; }
+  .detail-value { font-size: 0.9rem; font-weight: 500; color: var(--espresso); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--cream); }
+  .skills-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem;
+  }
+  .skill-item { margin-bottom: 0.5rem; }
+  .skill-header { display: flex; justify-content: space-between; align-items: center; }
+  .skill-name { font-size: 0.88rem; font-weight: 500; color: var(--espresso); }
+  .skill-level { 
+    font-size: 0.78rem; 
+    color: var(--terra); 
+    font-weight: 500;
+    background: rgba(196,99,58,0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--cream-dark); }
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-card {
+    display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: start;
+    padding: 2rem; background: var(--cream);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .exp-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(201,168,76,0.12), 0 8px 30px rgba(44,24,16,0.07);
+  }
+  .exp-meta { text-align: right; }
+  .exp-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem; font-style: italic;
+    color: var(--terra); margin-bottom: 0.3rem;
+  }
+  .exp-company {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 600; color: var(--espresso); margin-bottom: 1rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li {
+    font-size: 0.88rem; line-height: 1.7; color: var(--text-body);
+    padding-left: 1.2rem; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0; color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--cream); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; }
+  .project-card {
+    padding: 2rem; border: 1px solid rgba(44,24,16,0.1);
+    border-radius: 4px; background: var(--cream-dark);
+    position: relative; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 4px;
+    box-shadow: 0 0 0 0 rgba(201,168,76,0.5);
+    transition: box-shadow 0.35s ease;
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: transparent; }
+  .project-card:hover::before { box-shadow: 0 0 0 2px var(--gold), 0 16px 40px rgba(44,24,16,0.12); }
+  .project-tag {
+    display: inline-block; padding: 0.25rem 0.75rem;
+    background: rgba(196,99,58,0.12); color: var(--terra);
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 600; border-radius: 2px; margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--espresso); margin-bottom: 0.75rem;
+  }
+  .project-desc { font-size: 0.88rem; line-height: 1.75; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--terra); text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.7rem; }
+  .project-link .arrow { transition: transform 0.2s; }
+  .project-link:hover .arrow { transform: translateX(3px); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--espresso); }
+  #contact .section-label { color: var(--gold); }
+  #contact .section-title { color: var(--cream); }
+  #contact .divider { background: linear-gradient(90deg, var(--gold), var(--terra)); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-intro { font-size: 0.98rem; line-height: 1.8; color: rgba(245,240,232,0.75); margin-bottom: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex; gap: 1rem; align-items: center;
+    padding: 1rem 1.4rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .contact-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .contact-icon { font-size: 1.1rem; }
+  .contact-item-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; }
+  .contact-item a, .contact-item span { font-size: 0.88rem; color: var(--cream); text-decoration: none; }
+  .contact-item a:hover { color: var(--gold-light); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+  .form-group input, .form-group textarea {
+    background: rgba(245,240,232,0.06); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 3px; padding: 0.75rem 1rem;
+    font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--cream);
+    outline: none; resize: none; transition: border-color 0.25s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,240,232,0.3); }
+  .btn-send {
+    align-self: flex-start; padding: 0.75rem 2.2rem;
+    background: linear-gradient(135deg, var(--terra), var(--gold));
+    color: var(--espresso); border: none; cursor: pointer; border-radius: 2px;
+    font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-send:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--espresso); border-top: 1px solid rgba(201,168,76,0.12);
+    text-align: center; padding: 2rem;
+    font-size: 0.75rem; color: rgba(245,240,232,0.35);
+    position: relative; z-index: 1;
+  }
+  footer span { color: var(--gold); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── FADE UP ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(245,240,232,0.97); padding: 1.5rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .about-grid, .skills-grid, .contact-grid, .form-row { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-meta { text-align: left; }
+    nav { padding: 1rem 1.5rem; }
+    .section-wrap { padding: 4rem 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="loader-text">Ruth Salvage Egyir</div>
+</div>
+
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="nav-logo">Ruth Salvage Egyir</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#samples">Samples</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="avatar-wrap" style="opacity:0;animation:fadeUp 0.7s ease 2s forwards">
+      <div class="avatar-ring"></div>
+      <div class="avatar-ring-2"></div>
+      <div class="avatar-circle">RE</div>
+    </div>
+    <p class="hero-eyebrow">Customer Service & Virtual Assistant Professional</p>
+    <h1 class="hero-name" data-text="Ruth Salvage Egyir">Ruth Salvage Egyir</h1>
+    <p class="hero-title">Turning every interaction into a lasting impression.</p>
+    <p class="hero-tagline">Customer-focused professional based in Cape Coast, Ghana — specialising in empathetic support, digital assistance, and seamless remote collaboration for businesses that value people.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn btn-secondary">View Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-wrap">
+    <span class="section-label reveal">Who I Am</span>
+    <h2 class="section-title reveal">About Me</h2>
+    <div class="divider reveal"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm Ruth Salvage Egyir — a <strong>Remote Operations & Customer Success Professional</strong> dedicated to helping businesses save time, reduce chaos, and scale their operations. I excel at taking on the administrative and operational burdens that distract executives and teams from what matters most.</p>
+        <p>My track record spans multiple roles: managing high-volume customer interactions and CRM systems, leading front desk operations at MATLAT Hotel, executing telesales campaigns and customer engagement at Unateus, and independently launching digital products like "The Sky Career Guide" on Payhip. I have created sample Slack workspaces, Trello workflows, and administrative systems to demonstrate my ability to organize remote team operations.</p>
+        <p>What I bring to your business: <strong>reliability, initiative, and systems thinking.</strong> I don't just complete tasks—I anticipate needs, organize chaos into clarity, and build frameworks that scale. Whether you need someone to restore inbox sanity, orchestrate team communication, manage client relationships, support sales efforts, or streamline operations, I deliver results with minimal oversight and maximum professionalism.</p>
+      </div>
+      <div class="about-details reveal reveal-delay-2">
+        <div class="detail-item">
+          <div class="detail-icon">📍</div>
+          <div>
+            <div class="detail-label">Location</div>
+            <div class="detail-value">Cape Coast, Ghana (Remote Available)</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">📧</div>
+          <div>
+            <div class="detail-label">Email</div>
+            <div class="detail-value">ruthegyir80@gmail.com</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">📞</div>
+          <div>
+            <div class="detail-label">Phone</div>
+            <div class="detail-value">+233 249 819 311</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">🌐</div>
+          <div>
+            <div class="detail-label">LinkedIn</div>
+            <div class="detail-value"><a href="https://www.linkedin.com/in/ruth-egyir-0b511a3a5" target="_blank" style="color:var(--terra);text-decoration:none;">linkedin.com/in/ruth-egyir</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Offered -->
+    <div style="margin-top: 4rem; border-top: 2px solid rgba(201,168,76,0.2); padding-top: 3rem;">
+      <h3 class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--espresso); margin-bottom: 2rem;">Services I Offer</h3>
+      <div class="reveal reveal-delay-1" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 700px;">
+        <ul style="list-style: none; font-size: 0.95rem; line-height: 2.2; color: var(--text-body);">
+          <li>✓ <strong>Email Management</strong></li>
+          <li>✓ <strong>Calendar Management</strong></li>
+          <li>✓ <strong>Meeting Scheduling</strong></li>
+          <li>✓ <strong>Customer Support</strong></li>
+          <li>✓ <strong>Task Management</strong></li>
+        </ul>
+        <ul style="list-style: none; font-size: 0.95rem; line-height: 2.2; color: var(--text-body);">
+          <li>✓ <strong>Data Entry & Organization</strong></li>
+          <li>✓ <strong>Internet Research</strong></li>
+          <li>✓ <strong>Follow-up Management</strong></li>
+          <li>✓ <strong>Document Preparation</strong></li>
+          <li>✓ <strong>Administrative Support</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tools & Platforms -->
+    <div style="margin-top: 4rem; border-top: 2px solid rgba(201,168,76,0.2); padding-top: 3rem;">
+      <h3 class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--espresso); margin-bottom: 2rem;">Tools & Platforms I Use</h3>
+      <div class="reveal reveal-delay-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Google Workspace</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Gmail • Docs • Sheets • Calendar</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Trello</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Project Management</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Microsoft Office</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Word • Excel • Teams</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Slack</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Team Communication</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Canva</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Graphics & Design</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">CRM Systems</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Client Management</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Zoom/Meet</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Video Conferencing</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Notion</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Documentation & Databases</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">monday.com</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Boards & Project Tracking</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.08)); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--terra);">
+          <strong style="color: var(--terra); font-size: 0.9rem; display: block;">Make</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Workflow Automation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-wrap">
+    <span class="section-label reveal">What I Bring</span>
+    <h2 class="section-title reveal">Skills & Expertise</h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid" id="skillsGrid">
+      <div class="skill-item reveal">
+        <div class="skill-header"><span class="skill-name">Customer Service & Sales Support</span><span class="skill-level">Advanced</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-1">
+        <div class="skill-header"><span class="skill-name">Email Management</span><span class="skill-level">Intermediate</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-2">
+        <div class="skill-header"><span class="skill-name">Trello & Task Management</span><span class="skill-level">Intermediate</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-3">
+        <div class="skill-header"><span class="skill-name">Virtual Assistance</span><span class="skill-level">Advanced</span></div>
+      </div>
+      <div class="skill-item reveal">
+        <div class="skill-header"><span class="skill-name">Slack & Team Communication</span><span class="skill-level">Intermediate</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-1">
+        <div class="skill-header"><span class="skill-name">CRM Systems</span><span class="skill-level">Intermediate</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-2">
+        <div class="skill-header"><span class="skill-name">Google Workspace</span><span class="skill-level">Advanced</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-3">
+        <div class="skill-header"><span class="skill-name">Calendar & Meeting Scheduling</span><span class="skill-level">Advanced</span></div>
+      </div>
+      <div class="skill-item reveal">
+        <div class="skill-header"><span class="skill-name">Conflict Resolution & Problem-Solving</span><span class="skill-level">Advanced</span></div>
+      </div>
+      <div class="skill-item reveal reveal-delay-1">
+        <div class="skill-header"><span class="skill-name">Data Entry & Organization</span><span class="skill-level">Intermediate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-wrap">
+    <span class="section-label reveal">My Journey</span>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="divider reveal"></div>
+    <div class="timeline">
+
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <div class="exp-year">2025 — 2026</div>
+          <div class="exp-company">Unateus · Remote</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Telesales Call Centre Operator / Customer Service Representative</h3>
+          <ul class="exp-bullets">
+            <li>Conducted outbound customer calls to engage prospects and support sales conversations.</li>
+            <li>Maintained accurate and up-to-date customer records in CRM systems during and after calls.</li>
+            <li>Followed up on customer inquiries and coordinated sales conversations to meet team targets.</li>
+            <li>Provided professional customer service while managing high-volume daily interactions.</li>
+            <li>Supported customer engagement through clear communication and relationship-building techniques.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-meta">
+          <div class="exp-year">2023</div>
+          <div class="exp-company">Customer Service & Sales Support Projects</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Customer Service Representative</h3>
+          <ul class="exp-bullets">
+            <li>Handled customer enquiries via phone, email, and live chat, maintaining professional service standards.</li>
+            <li>Built lasting customer relationships through empathetic communication and timely follow-up.</li>
+            <li>Managed CRM systems to track cases, document resolutions, and maintain accurate customer records.</li>
+            <li>Supported customer onboarding and guided clients through processes to reduce friction.</li>
+            <li>Managed complaints professionally, converting difficult interactions into positive outcomes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-meta">
+          <div class="exp-year">2022 — 2023</div>
+          <div class="exp-company">MATLAT Hotel · Ghana</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Receptionist & Front Desk Manager</h3>
+          <ul class="exp-bullets">
+            <li>Delivered excellent customer service to hotel guests, maintaining high hospitality and presentation standards.</li>
+            <li>Managed all front desk operations including check-in, check-out, and guest enquiries.</li>
+            <li>Coordinated reservations, bookings, and scheduling across multiple departments.</li>
+            <li>Handled phone calls, administrative tasks, and multi-channel communication in a fast-paced environment.</li>
+            <li>Maintained accurate guest records and contributed to a seamless guest experience from arrival to departure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card reveal reveal-delay-3">
+        <div class="exp-meta">
+          <div class="exp-year">Ongoing</div>
+          <div class="exp-company">Self-Initiated · Remote</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Virtual Assistant & Website Builder</h3>
+          <ul class="exp-bullets">
+            <li>Provides remote virtual assistance including email management, data entry, scheduling, and administrative support.</li>
+            <li>Creates social media content calendars, Canva graphics, and TikTok/Instagram strategies for small businesses.</li>
+            <li>Builds and maintains client-facing web presences to support business visibility and professional branding.</li>
+            <li>Uses tools including Canva, Google Docs, CapCut, Notion, and Gmail to deliver organised, high-quality remote work.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-wrap">
+    <span class="section-label reveal">What I've Built</span>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="divider reveal"></div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <span class="project-tag">Digital Products</span>
+        <h3 class="project-title">The Sky Career Guide</h3>
+        <p class="project-desc">Created and sells a comprehensive career development eBook — "Skills Employers Want: Career Growth & Interview Success Guide" — helping job seekers build high-demand skills, ace interviews, and stand out in competitive markets. Distributed via Payhip as a fully independent digital product.</p>
+        <a href="https://payhip.com/TheSkyCareerGuide" target="_blank" class="project-link">
+          View on Payhip <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <span class="project-tag">Social Media Strategy</span>
+        <h3 class="project-title">Small Business Social Media Campaigns</h3>
+        <p class="project-desc">Developed mock Instagram and TikTok content strategies for small business simulations — including content calendars, branded Canva graphics, and engagement copy. Built to demonstrate real-world social media management capability for remote client work.</p>
+        <a href="#contact" class="project-link">
+          Request Portfolio Samples <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <span class="project-tag">Virtual Assistance</span>
+        <h3 class="project-title">Trello Workflow Setup</h3>
+        <p class="project-desc">Created a comprehensive task management system to organize projects and improve workflow visibility with structured stages: Backlog, To Do, In Progress, Review, and Completed.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Skills:</strong> Project organization • Task tracking • Workflow management
+        </div>
+        <a href="#contact" class="project-link">
+          View Full Portfolio <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Executive Support</span>
+        <h3 class="project-title">Email & Calendar Management</h3>
+        <p class="project-desc">Developed executive support workflows for managing emails, scheduling meetings, and professional communication with ready-to-use templates and systems.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Skills:</strong> Email writing • Calendar coordination • Meeting scheduling • Executive support
+        </div>
+        <a href="#contact" class="project-link">
+          Enquire About Templates <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <span class="project-tag">Inbox Management</span>
+        <h3 class="project-title">Email Organization System</h3>
+        <p class="project-desc">Designed a comprehensive email organization system with 8 priority-based labels to help executives prioritize and manage communication effectively.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Skills:</strong> Inbox management • Priority handling • Follow-up tracking
+        </div>
+        <a href="#contact" class="project-link">
+          Learn More <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <span class="project-tag">Team Communication</span>
+        <h3 class="project-title">Remote Team Communication Setup</h3>
+        <p class="project-desc">Created a sample Slack workspace demonstrating channel organization, team communication, and workflow coordination for remote teams. Includes channels for client work, daily standups, resource sharing, and task management.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Tools:</strong> Slack • <strong>Skills:</strong> Team coordination • Workspace organization • Communication workflows
+        </div>
+        <a href="#contact" class="project-link">
+          View Details <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Client Operations</span>
+        <h3 class="project-title">Client Onboarding System</h3>
+        <p class="project-desc">Built an end-to-end client onboarding workflow across Notion and monday.com — a linked client database and task manager in Notion, plus a monday.com board that tracks each onboarding step from collecting client information to the kickoff meeting and final review.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Tools:</strong> Notion • monday.com • <strong>Skills:</strong> Client onboarding • Database design • Task tracking
+        </div>
+        <a href="#samples" class="project-link">
+          See the Samples <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <span class="project-tag">Workflow Automation</span>
+        <h3 class="project-title">Notion → monday.com Integration</h3>
+        <p class="project-desc">Designed a no-code automation in Make that watches a Notion database for new items and automatically creates matching items on a monday.com board every 15 minutes — removing manual double entry and keeping both systems in sync.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Tools:</strong> Make • Notion • monday.com • <strong>Skills:</strong> Automation • Systems integration • Process improvement
+        </div>
+        <a href="#samples" class="project-link">
+          See the Samples <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <span class="project-tag">Operations Reporting</span>
+        <h3 class="project-title">Weekly Operations Report</h3>
+        <p class="project-desc">Set up a Notion reporting page where each week gets its own logged entry with the reporting period, owner, and submission date — giving managers a consistent, searchable record of weekly operations updates.</p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Tools:</strong> Notion • <strong>Skills:</strong> Reporting • Documentation • Operations tracking
+        </div>
+        <a href="#samples" class="project-link">
+          See the Samples <span class="arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Customer Service Highlights -->
+<section id="highlights" style="background: #F5EFE1; padding: 5rem 0;">
+  <div class="section-wrap">
+    <span class="section-label reveal">Key Strengths</span>
+    <h2 class="section-title reveal">Customer Service Highlights</h2>
+    <div class="divider reveal"></div>
+    <div class="reveal reveal-delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2.5rem;">
+      
+      <div style="padding: 1.5rem; background: rgba(196,99,58,0.06); border-left: 3px solid var(--terra); border-radius: 4px;">
+        <div style="font-size: 1.4rem; margin-bottom: 0.8rem;">📞</div>
+        <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; margin-bottom: 0.8rem;">High-Volume Interactions</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">Managed high-volume customer interactions with professionalism and attention to detail, maintaining service quality across multiple communication channels.</p>
+      </div>
+
+      <div style="padding: 1.5rem; background: rgba(196,99,58,0.06); border-left: 3px solid var(--terra); border-radius: 4px;">
+        <div style="font-size: 1.4rem; margin-bottom: 0.8rem;">📊</div>
+        <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; margin-bottom: 0.8rem;">Accurate Record Keeping</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">Maintained accurate and up-to-date customer records in CRM systems, ensuring data integrity and easy information retrieval for follow-ups.</p>
+      </div>
+
+      <div style="padding: 1.5rem; background: rgba(196,99,58,0.06); border-left: 3px solid var(--terra); border-radius: 4px;">
+        <div style="font-size: 1.4rem; margin-bottom: 0.8rem;">🎯</div>
+        <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; margin-bottom: 0.8rem;">Sales Support & Follow-ups</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">Supported sales conversations and managed follow-ups effectively, helping teams meet targets while maintaining excellent customer relationships.</p>
+      </div>
+
+      <div style="padding: 1.5rem; background: rgba(196,99,58,0.06); border-left: 3px solid var(--terra); border-radius: 4px;">
+        <div style="font-size: 1.4rem; margin-bottom: 0.8rem;">💬</div>
+        <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; margin-bottom: 0.8rem;">Clear Communication</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">Improved customer experience through clear, empathetic communication, transforming inquiries into positive outcomes and lasting customer relationships.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Samples -->
+<section id="samples">
+  <div class="section-wrap">
+    <span class="section-label reveal">Visual Examples</span>
+    <h2 class="section-title reveal">Portfolio Samples</h2>
+    <div class="divider reveal"></div>
+    <p class="reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+      Below are examples of my work including Notion operations systems, monday.com onboarding boards, Make automations, executive email templates, Slack workspace organization, and professional meeting agenda templates.
+    </p>
+
+    <div class="samples-grid reveal reveal-delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+      <div class="sample-card">
+        <p class="sample-title">Client Onboarding Board — monday.com</p>
+        <a href="/img/monday-client-onboarding-board.png" target="_blank" rel="noopener"><img src="/.netlify/images?url=/img/monday-client-onboarding-board.png&w=900&fm=webp" alt="monday.com Client Onboarding board with To-Do and Completed groups" loading="lazy"></a>
+        <p class="sample-desc">A monday.com board that walks each new client through onboarding. Tasks such as collecting client information, scheduling the kickoff meeting, and completing the onboarding review are colour-coded by status (Working on it, Done, Stuck), with due dates, attached files, and a timeline summary so nothing slips through the cracks.</p>
+      </div>
+
+      <div class="sample-card">
+        <p class="sample-title">Notion → monday.com Automation — Make</p>
+        <a href="/img/make-notion-monday-integration.png" target="_blank" rel="noopener"><img src="/.netlify/images?url=/img/make-notion-monday-integration.png&w=900&fm=webp" alt="Make scenario connecting Notion to monday.com" loading="lazy"></a>
+        <p class="sample-desc">A Make scenario that watches a Notion data source for new items and automatically creates a matching item in monday.com. Scheduled to run every 15 minutes, it keeps both tools in sync without manual copy-and-paste.</p>
+      </div>
+
+      <div class="sample-card">
+        <p class="sample-title">Client Onboarding System — Notion</p>
+        <a href="/img/notion-client-onboarding-system.png" target="_blank" rel="noopener"><img src="/.netlify/images?url=/img/notion-client-onboarding-system.png&w=900&fm=webp" alt="Notion Client Database and Task Manager" loading="lazy"></a>
+        <p class="sample-desc">A Notion workspace with a Client Database (client name, company, and onboarding status) linked to a Task Manager, so every follow-up — like "Follow up on proposal" or "Schedule onboarding meeting" — is tied to the right client and owner.</p>
+      </div>
+
+      <div class="sample-card">
+        <p class="sample-title">Weekly Operations Report — Notion</p>
+        <a href="/img/notion-weekly-operations-report.png" target="_blank" rel="noopener"><img src="/.netlify/images?url=/img/notion-weekly-operations-report.png&w=900&fm=webp" alt="Notion Weekly Operations Report page" loading="lazy"></a>
+        <p class="sample-desc">A weekly reporting page in Notion where each week is logged as its own entry with the reporting period, the person who created it, and the reporting date. It sits alongside a Client Operations Hub, Calendar Management SOP, and Meetings pages in the same workspace.</p>
+      </div>
+
+      <div class="sample-card">
+        <p class="sample-title">Executive Inbox — Email Templates</p>
+        <a href="/img/executive-inbox-email-templates.png" target="_blank" rel="noopener"><img src="/.netlify/images?url=/img/executive-inbox-email-templates.png&w=900&fm=webp" alt="Executive Inbox email templates document" loading="lazy"></a>
+        <p class="sample-desc">A library of ready-to-use email templates for the situations an Executive Assistant handles every day — starting with meeting requests that offer three time options. Placeholders in [brackets] make each template quick to personalise before sending.</p>
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Slack Client Channel Demo</p>
+        <img src="/.netlify/images?url=/img/slack-client-channel.png&w=900&fm=webp" alt="Slack Client Channel" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Slack Workspace Organization</p>
+        <img src="/.netlify/images?url=/img/slack-workspace-channels.png&w=900&fm=webp" alt="Slack Workspace Channels" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Slack Channel Structure</p>
+        <img src="/.netlify/images?url=/img/slack-channel-structure.png&w=900&fm=webp" alt="Slack Channels" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Daily Standup Channel</p>
+        <img src="/.netlify/images?url=/img/daily-standup.png&w=900&fm=webp" alt="Daily Standup" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Trello VA Operations Dashboard</p>
+        <img src="/.netlify/images?url=/img/trello-va-dashboard.jpg&w=900&fm=webp" alt="Trello VA Operations Dashboard" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+      <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden;">
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--terra); margin-bottom: 0.5rem;">Professional Meeting Agenda Template</p>
+        <img src="/.netlify/images?url=/img/meeting-agenda-template.png&w=900&fm=webp" alt="Meeting Agenda Template" style="width: 100%; height: auto; border-radius: 4px;">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Templates & Systems -->
+<section id="templates" style="background: linear-gradient(135deg, rgba(196,99,58,0.04), rgba(201,168,76,0.04));">
+  <div class="section-wrap">
+    <span class="section-label reveal">Ready to Deploy</span>
+    <h2 class="section-title reveal">Templates & Systems</h2>
+    <div class="divider reveal"></div>
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+
+      <div style="background: white; padding: 2rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 4px 12px rgba(44,24,16,0.06);">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">📋</span>
+          <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">Weekly Team Meeting Template</h3>
+        </div>
+        <ul style="list-style: none; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
+          <li>✓ Date & Time</li>
+          <li>✓ Location/Meeting Link</li>
+          <li>✓ Attendees List</li>
+          <li>✓ Agenda Items</li>
+          <li>✓ Action Items with Owners</li>
+          <li>✓ Due Dates & Status</li>
+        </ul>
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 4px 12px rgba(44,24,16,0.06);">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">📞</span>
+          <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">Client Follow-Up Tracker</h3>
+        </div>
+        <ul style="list-style: none; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
+          <li>✓ Client Name & Details</li>
+          <li>✓ Contact Information</li>
+          <li>✓ Follow-Up Date Schedule</li>
+          <li>✓ Status Updates</li>
+          <li>✓ Next Action Steps</li>
+          <li>✓ Automated Reminders</li>
+        </ul>
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 4px 12px rgba(44,24,16,0.06);">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">✅</span>
+          <h3 style="color: var(--espresso); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">Daily Task Planner</h3>
+        </div>
+        <ul style="list-style: none; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
+          <li>✓ Task Description</li>
+          <li>✓ Priority Level</li>
+          <li>✓ Deadline Tracking</li>
+          <li>✓ Status Management</li>
+          <li>✓ Notes & Context</li>
+          <li>✓ Completion Logging</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-wrap">
+    <span class="section-label reveal">Let's Connect</span>
+    <h2 class="section-title reveal">Get In Touch</h2>
+    <div class="divider reveal"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro reveal">I'm available for <strong>administrative support</strong>, <strong>customer service support</strong>, and <strong>remote assistant roles</strong>. Whether you need help with email management, calendar coordination, task organization, or building scalable workflows, I'm ready to support your business growth. Let's work together.</p>
+        <div class="contact-items reveal reveal-delay-1">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <a href="mailto:ruthegyir80@gmail.com">ruthegyir80@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <span>+233 249 819 311</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💼</div>
+            <div>
+              <div class="contact-item-label">LinkedIn</div>
+              <a href="https://www.linkedin.com/in/ruth-egyir-0b511a3a5" target="_blank">linkedin.com/in/ruth-egyir</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🛒</div>
+            <div>
+              <div class="contact-item-label">Digital Products</div>
+              <a href="https://payhip.com/TheSkyCareerGuide" target="_blank">payhip.com/TheSkyCareerGuide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-2">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Jane Smith">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="hello@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Remote position enquiry">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about the role or project..."></textarea>
+        </div>
+        <button class="btn-send" onclick="handleSend(this)">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  Crafted with intention by <span>Ruth Salvage Egyir</span> · Cape Coast, Ghana · 2026
+</footer>
+
+<script>
+  /* ── PARTICLES ── */
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.body.scrollHeight;
+  }
+
+  function createParticles() {
+    particles = [];
+    const count = Math.floor((canvas.width * canvas.height) / 28000);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2.5 + 0.5,
+        dx: (Math.random() - 0.5) * 0.18,
+        dy: (Math.random() - 0.5) * 0.18,
+        alpha: Math.random() * 0.35 + 0.08,
+        color: Math.random() > 0.5 ? '#C9A84C' : '#C4633A'
+      });
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animateParticles);
+  }
+
+  window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
+  resizeCanvas();
+  createParticles();
+  animateParticles();
+
+  /* ── NAV SCROLL ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── HAMBURGER ── */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── SKILL BARS ── */
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+          setTimeout(() => {
+            fill.style.width = fill.dataset.pct + '%';
+          }, 150);
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) skillObserver.observe(skillsSection);
+
+  /* ── CONTACT FORM ── */
+  function handleSend(btn) {
+    const original = btn.textContent;
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = 'linear-gradient(135deg, #5C3D2E, #C9A84C)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 3000);
+  }
+
+  /* ── CANVAS RESIZE ON LOAD ── */
+  window.addEventListener('load', () => {
+    resizeCanvas();
+    createParticles();
+  });
+</script>
+</body>
+</html>

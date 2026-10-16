@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <rect width="100%" height="100%" fill="#F5F0E8"/>
+  <rect x="60" y="80" width="1080" height="1440" rx="20" fill="#fff" stroke="#C9A84C" stroke-width="6"/>
+  <text x="120" y="240" font-family="Playfair Display, serif" font-size="48" fill="#2C1810">Remote Opportunity Research &amp; Vetting Report</text>
+  <text x="120" y="300" font-family="Inter, sans-serif" font-size="20" fill="#5C3D2E">Prepared by: Ruth Salvage Egyir</text>
+  <text x="120" y="330" font-family="Inter, sans-serif" font-size="18" fill="#7A5C4A">Research date: 15 October 2026</text>
+  <line x1="120" y1="360" x2="1080" y2="360" stroke="#E8D5A3" stroke-width="4"/>
+  <g transform="translate(120,400)">
+    <rect width="420" height="260" rx="8" fill="#F7F5F2" stroke="#D6C6A2"/>
+    <text x="18" y="38" font-family="Inter, sans-serif" font-size="16" fill="#C4633A">Pavago</text>
+    <text x="18" y="70" font-family="Inter, sans-serif" font-size="14" fill="#3D2B1F">Africa-wide candidate programme; Ghana-based profiles shown</text>
+  </g>
+  <g transform="translate(560,400)">
+    <rect width="420" height="260" rx="8" fill="#F7F5F2" stroke="#D6C6A2"/>
+    <text x="18" y="38" font-family="Inter, sans-serif" font-size="16" fill="#C4633A">Crossover</text>
+    <text x="18" y="70" font-family="Inter, sans-serif" font-size="14" fill="#3D2B1F">Ghana page exists; no public support roles open at last check</text>
+  </g>
+  <text x="120" y="740" font-family="Inter, sans-serif" font-size="14" fill="#7A5C4A">Download full report as PDF from the portfolio page.</text>
+</svg>

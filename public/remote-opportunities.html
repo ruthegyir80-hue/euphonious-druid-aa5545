@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote Opportunities & Vetting Report | Ruth Salvage Egyir</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --cream-dark: #EDE6D8;
+      --espresso: #2C1810;
+      --brown-mid: #5C3D2E;
+      --terra: #C4633A;
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --blush: #E8D5C4;
+      --text-body: #3D2B1F;
+      --text-muted: #7A5C4A;
+      --card: #fffdfa;
+      --line: rgba(44,24,16,0.12);
+      --shadow: 0 18px 40px rgba(44,24,16,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--espresso);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      color: var(--brown-mid);
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .hero {
+      padding-top: 4rem;
+      padding-bottom: 3rem;
+      background: linear-gradient(180deg, rgba(201,168,76,0.05), rgba(196,99,58,0.02));
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.42);
+      border: 1px solid rgba(201,168,76,0.24);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 700;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--espresso);
+      line-height: 1.1;
+      margin: 0 0 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      max-width: 740px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin: 0 0 2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0 0;
+    }
+
+    .meta-pill {
+      background: rgba(196,99,58,0.08);
+      border: 1px solid rgba(196,99,58,0.12);
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--brown-mid);
+      font-weight: 600;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.82rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(44,24,16,0.12);
+    }
+
+    .btn-primary {
+      background: var(--espresso);
+      color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      border: 1.5px solid var(--terra);
+      color: var(--terra);
+      background: rgba(255,255,255,0.5);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.4rem;
+      box-shadow: 0 10px 22px rgba(44,24,16,0.04);
+    }
+
+    .summary-number {
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      font-family: 'Playfair Display', serif;
+      color: var(--terra);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .summary-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      max-width: 820px;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(44,24,16,0.04);
+    }
+
+    th, td {
+      padding: 1rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(201,168,76,0.12);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+    }
+
+    td {
+      font-size: 0.92rem;
+      color: var(--text-body);
+    }
+
+    .status {
+      display: inline-block;
+      padding: 0.38rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .status.good { background: rgba(52,168,83,0.12); color: #236c34; }
+    .status.warn { background: rgba(201,168,76,0.16); color: #7b5a14; }
+    .status.bad { background: rgba(196,99,58,0.12); color: #a34f2c; }
+    .status.neutral { background: rgba(92,61,46,0.08); color: var(--brown-mid); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .company-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 24px rgba(44,24,16,0.04);
+    }
+
+    .company-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .company-role {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--terra);
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .company-card p {
+      margin: 0 0 0.9rem;
+      font-size: 0.93rem;
+      color: var(--text-body);
+    }
+
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+
+    .bullet-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .caution-box {
+      background: rgba(196,99,58,0.07);
+      border: 1px solid rgba(196,99,58,0.15);
+      border-left: 4px solid var(--terra);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+
+    .caution-box p {
+      margin: 0;
+      color: var(--text-body);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold-light);
+      border-radius: 50%;
+      color: var(--espresso);
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--text-body);
+    }
+
+    footer {
+      background: var(--espresso);
+      color: rgba(245,240,232,0.72);
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .nav-inner {
+        flex-direction: column;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      th, td {
+        padding: 0.8rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">Ruth Salvage Egyir</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Portfolio</a></li>
+        <li><a href="#report">Report</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-card">
+      <p class="eyebrow">Remote opportunity research</p>
+      <h1>Remote Opportunities &amp; Vetting Report</h1>
+      <p class="subtitle">
+        A source-first shortlist of remote Virtual Assistant, Administrative Assistant, and Customer Support opportunities that may suit Ghana-based applicants, with eligibility checks and warning signs included.
+      </p>
+
+      <div class="btn-row">
+        <a href="#report" class="btn btn-primary">View report</a>
+        <a href="index.html" class="btn btn-secondary">Back to portfolio</a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-pill">Prepared by: Ruth Salvage Egyir</div>
+        <div class="meta-pill">Research date: 15 Oct 2026</div>
+        <div class="meta-pill">7 companies reviewed</div>
+      </div>
+    </div>
+  </header>
+
+  <main id="report" class="container section">
+    <p class="eyebrow">Executive summary</p>
+    <h2>Shortlist findings</h2>
+    <p class="lead">
+      The strongest candidate on the current evidence is Pavago, because it publishes an Africa-wide talent programme and includes Ghana-based profiles. However, it remains <strong>plausible but unconfirmed</strong> rather than fully verified, because the company does not explicitly list Ghana as a qualifying country in every posting.
+    </p>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-number">1</div>
+        <div class="summary-label">Likely fit</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">2</div>
+        <div class="summary-label">Confirmed ineligible</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">4</div>
+        <div class="summary-label">Needs re-check</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">7</div>
+        <div class="summary-label">Companies assessed</div>
+      </div>
+    </div>
+
+    <div class="caution-box" style="margin-top: 2.5rem;">
+      <p>
+        <strong>Important:</strong> no live, role-specific vacancy was confirmed as open to Ghana-based applicants on the day of research. Every employer page should be re-checked before submitting an application.
+      </p>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <p class="eyebrow">Results at a glance</p>
+      <table aria-label="Opportunity research results table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Ghana eligibility</th>
+            <th>Status</th>
+            <th>Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pavago</td>
+            <td>Africa-wide candidate programme; Ghana-based profiles shown</td>
+            <td><span class="status warn">Plausible</span></td>
+            <td>Pavago Africa page (self-published, undated)</td>
+          </tr>
+          <tr>
+            <td>Crossover</td>
+            <td>Ghana page exists; no public support roles open at last check</td>
+            <td><span class="status neutral">Unverified</span></td>
+            <td>Crossover Ghana support page</td>
+          </tr>
+          <tr>
+            <td>Afri VA Hub</td>
+            <td>States it recruits only from Africa</td>
+            <td><span class="status neutral">Unverified</span></td>
+            <td>Career page (updated 1 Sep 2026)</td>
+          </tr>
+          <tr>
+            <td>beehiiv</td>
+            <td>Ghana is on the excluded list</td>
+            <td><span class="status bad">Not eligible</span></td>
+            <td>Posting on Himalayas (posted 18 Sep 2026)</td>
+          </tr>
+          <tr>
+            <td>OnlineJobs.ph</td>
+            <td>States it does not accept workers from Africa</td>
+            <td><span class="status bad">Not eligible</span></td>
+            <td>Official jobseeker page</td>
+          </tr>
+          <tr>
+            <td>Wing Assistant</td>
+            <td>Postings are country-specific (e.g. US only); none seen for Ghana</td>
+            <td><span class="status neutral">No Ghana role found</span></td>
+            <td>Wing US posting</td>
+          </tr>
+          <tr>
+            <td>Time Etc</td>
+            <td>Wants 5–8 years experience; Ghana not mentioned</td>
+            <td><span class="status bad">Not a fit</span></td>
+            <td>Time etc freelance page</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <p class="eyebrow">Opportunity profiles</p>
+      <h2>Reviewed companies</h2>
+      <div class="cards">
+        <article class="company-card">
+          <h3>Pavago</h3>
+          <div class="company-role">Talent marketplace</div>
+          <p><strong>Eligibility:</strong> Plausible but unconfirmed for Ghana-based applicants.</p>
+          <ul class="bullet-list">
+            <li>Open to candidates in Africa according to the company’s Africa page.</li>
+            <li>Roles include Virtual Assistant, Executive Assistant, and Customer Service Representative.</li>
+            <li>Joining is free and no direct fee was found.</li>
+          </ul>
+        </article>
+
+        <article class="company-card">
+          <h3>Crossover</h3>
+          <div class="company-role">Customer support & success</div>
+          <p><strong>Eligibility:</strong> Ghana page exists, but no public support roles were open at the last check.</p>
+          <ul class="bullet-list">
+            <li>Application is via the Ghana support page.</li>
+            <li>Roles are long-term, remote and assessment-heavy.</li>
+            <li>Consider weekly re-checking due to changing openings.</li>
+          </ul>
+        </article>
+
+        <article class="company-card">
+          <h3>Afri VA Hub</h3>
+          <div class="company-role">Virtual assistant recruiting</div>
+          <p><strong>Eligibility:</strong> Claims to recruit only from Africa, but business signals require verification.</p>
+          <ul class="bullet-list">
+            <li>Career page states African recruitment focus.</li>
+            <li>Use of generic testimonials and a Google Form raises caution.</li>
+            <li>Verify before sharing personal documents or credentials.</li>
+          </ul>
+        </article>
+
+        <article class="company-card">
+          <h3>beehiiv</h3>
+          <div class="company-role">Customer support</div>
+          <p><strong>Eligibility:</strong> Ghana is explicitly excluded by the employer’s own wording.</p>
+          <ul class="bullet-list">
+            <li>Aggregator labels were inconsistent with the official job text.</li>
+            <li>Employer wording overrides third-party country tags.</li>
+            <li>Do not rely solely on aggregators for eligibility.</li>
+          </ul>
+        </article>
+
+        <article class="company-card">
+          <h3>OnlineJobs.ph</h3>
+          <div class="company-role">Remote work platform</div>
+          <p><strong>Eligibility:</strong> Not eligible for Africa-based workers.</p>
+          <ul class="bullet-list">
+            <li>Company page explicitly excludes workers from Africa.</li>
+            <li>Not a viable path for Ghana-based applicants.</li>
+            <li>Best treated as a closed route for this brief.</li>
+          </ul>
+        </article>
+
+        <article class="company-card">
+          <h3>Wing Assistant</h3>
+          <div class="company-role">Administrative staffing</div>
+          <p><strong>Eligibility:</strong> No Ghana-specific roles found; country-specific postings dominate.</p>
+          <ul class="bullet-list">
+            <li>US-only roles were more common in search results.</li>
+            <li>Check directly before applying to any role.</li>
+            <li>Not a clear fit from current evidence.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <p class="eyebrow">Key findings</p>
+      <h2>What this research shows</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Official pages win</h3>
+          <p>The employer’s own wording should override aggregator labels, especially where those labels conflict with role requirements.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Ghana eligibility is narrow</h3>
+          <p>Almost all of the clearly relevant roles either excluded Ghana or had no confirmable public posting at the time of review.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Watch for red flags</h3>
+          <p>Unclear business information, generic testimonials, and requests for personal email applications are strong reasons to pause and verify.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <p class="eyebrow">Recommended next steps</p>
+      <h2>Action plan</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">A</div>
+          <h3>Create a Pavago profile</h3>
+          <p>Set up a profile and monitor the client roles that appear for remote administrative and support work.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">B</div>
+          <h3>Check Crossover weekly</h3>
+          <p>The Ghana support page may open new support roles, but it needs regular checks.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">C</div>
+          <h3>Never pay a fee</h3>
+          <p>Before applying anywhere, verify the employer’s own page and do not pay a registration or application fee.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">Ruth Salvage Egyir — Remote Operations &amp; Customer Support Portfolio</div>
+  </footer>
+</body>
+</html>

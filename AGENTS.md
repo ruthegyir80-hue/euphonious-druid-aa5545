@@ -15,3 +15,14 @@ This is a static site with no build step. Netlify publishes `public/` (see `netl
 
 ## Notes
 - The contact form is visual only. `handleSend` shows a confirmation but submits nothing. Use Netlify Forms if real submissions are needed.
+
+---
+
+## Remote Opportunities & Vetting Report
+
+This portfolio includes a dedicated remote opportunities and vetting report page for research-based freelance/remote work discovery.
+
+- `public/remote-opportunities.html` includes the executive summary, a results table, company evaluation cards, key findings, and recommended next steps.
+- `REPORT.md` contains the full written report in repository-readable Markdown format.
+- The page is designed to match the site's existing palette, fonts, card styles, and overall portfolio aesthetic.
+- When adding images to portfolio samples, store them in `public/img/` and use Netlify Image CDN paths such as `/.netlify/images?url=/img/<filename>&w=900&fm=webp`.
